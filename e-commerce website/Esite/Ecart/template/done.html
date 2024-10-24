@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Delivery Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light background for contrast */
+            padding: 20px; /* Space around the page */
+            text-align: center; /* Center align text */
+        }
+        .header {
+            background-color: #4CAF50; /* Green background for header */
+            color: white; /* White text */
+            padding: 15px; /* Padding inside header */
+            border-radius: 8px; /* Rounded corners for header */
+            margin-bottom: 20px; /* Space below header */
+        }
+        .product-name {
+            font-size: 24px; /* Font size for product name */
+            margin: 10px 0; /* Space above and below product name */
+        }
+        .delivery-message {
+            font-size: 18px; /* Font size for delivery message */
+            margin: 20px 0; /* Space around delivery message */
+        }
+        .home-link {
+            display: inline-block; /* Inline block for link styling */
+            margin-top: 15px; /* Space above link */
+            padding: 10px 15px; /* Padding inside link */
+            background-color: #007BFF; /* Blue background for button */
+            color: white; /* White text for button */
+            text-decoration: none; /* No underline for link */
+            border-radius: 5px; /* Rounded corners for button */
+        }
+        .home-link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        img {
+            max-width: 100%; /* Responsive image */
+            height: auto; /* Maintain aspect ratio */
+            margin: 20px 0; /* Space around the image */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Congratulations!</h1>
+</div>
+
+<h3 class="product-name">{{ product.product_name }}</h3>
+<img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+
+<p class="delivery-message">Your product will be delivered soon!</p>
+
+<a href="{% url 'home' %}" class="home-link">Back to Home Page</a>
+
+</body>
+</html>

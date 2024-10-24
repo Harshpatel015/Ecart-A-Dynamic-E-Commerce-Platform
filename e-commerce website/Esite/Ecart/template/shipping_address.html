@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0; /* Light background for contrast */
+        padding: 20px; /* Space around the page */
+    }
+
+    /* Header Styles */
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px; /* Space below the header */
+        border-radius: 8px; /* Rounded corners for header */
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center items in the container */
+        gap: 20px; /* Space between items */
+    }
+
+    .item {
+        background-color: #fff; /* White background for boxes */
+        border: 1px solid #ddd; /* Light gray border */
+        border-radius: 8px; /* Rounded corners */
+        width: 150px; /* Fixed width for boxes */
+        text-align: center; /* Center text and images */
+        padding: 10px; /* Space inside boxes */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: transform 0.2s; /* Smooth scaling effect */
+    }
+
+    .item img {
+        width: 120%; /* Increased width for images */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Match corners with item */
+        margin-left: -10%; /* Center the image */
+    }
+
+    .item h4 {
+        margin-top: 10px; /* Space above text */
+        font-size: 14px; /* Decreased font size for sub-category names */
+    }
+
+    .item:hover {
+        transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+
+    /* Additional styles for product names */
+    .product-name {
+        margin: 20px 0; /* Space above and below product names */
+        text-align: center; /* Center product names */
+        font-size: 16px; /* Font size for product names */
+        color: #333; /* Darker text color */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header HTML -->
+<div class="header">
+    <h1>Your Site Title</h1>
+    <p>Welcome to our product categories!</p>
+</div>
+
+<!-- Container for Image Boxes -->
+<div class="container">
+ Shipping Address Page
+    
+</div>
+
+<!-- Display Product according to sub category Sub Categories -->
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn" type="submit">Confirm</button>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4; /* Light gray background for the whole page */
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Header Styles */
+    .header {
+        background-color: #3f51b5; /* Indigo header */
+        color: #ffffff; /* White text */
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px; /* Rounded corners */
+        margin-bottom: 30px; /* Space below the header */
+    }
+
+    .header h1 {
+        font-size: 2.5em; /* Large title size */
+        margin-bottom: 10px; /* Space below title */
+    }
+
+    .header p {
+        font-size: 1.2em; /* Subtitle size */
+        margin: 0; /* Remove default margin */
+    }
+
+    /* Product Grid Styles */
+    .product-container {
+        display: flex;
+        flex-wrap: wrap; /* Wrap items to new line */
+        justify-content: center; /* Center products */
+        margin-top: 20px; /* Space above product section */
+        background-color: #ffffff; /* White background for products */
+        border: 2px solid #ddd; /* Thicker light gray border */
+        border-radius: 8px; /* Rounded corners */
+        padding: 20px; /* Padding for product section */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    }
+
+    .product-box {
+        background-color: #ffffff; /* White background for product boxes */
+        border: 2px solid #ddd; /* Thicker light gray border */
+        border-radius: 8px; /* Rounded corners */
+        width: 220px; /* Fixed width for product boxes */
+        height: 300px; /* Fixed height for product boxes */
+        margin: 10px; /* Space around product boxes */
+        padding: 15px; /* Space inside boxes */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+        text-align: center; /* Center text and images */
+        transition: transform 0.2s; /* Smooth scaling effect */
+    }
+
+    .product-box img {
+        width: 100%; /* Full width for product images */
+        height: 150px; /* Fixed height for consistent product image sizes */
+        object-fit: cover; /* Cover the area without stretching */
+        border-radius: 8px; /* Match corners with box */
+    }
+
+    .product-box h4 {
+        font-size: 1.2em; /* Font size for product names */
+        margin: 10px 0; /* Space above and below product names */
+        color: #333; /* Dark text color */
+    }
+
+    .product-box:hover {
+        transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .product-box {
+            width: calc(100% - 20px); /* Full width on smaller screens */
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header HTML -->
+<div class="header">
+    <h1>Welcome to E-Cart</h1>
+    <p>Find everything you want!</p>
+</div>
+
+<!-- Display Product Categories -->
+<h2 style="color: #333; text-align: center;">Products in Selected Category</h2>
+<div class="product-container">
+    {% for data in product_sub_wise %}
+    <a href="{% url 'productdetails_page' data.id %}">
+        <div class="product-box">
+            <img src="{{ data.product_image.url }}" alt="{{ data.product_name }}">
+            <h4>{{ data.product_name }}</h4>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

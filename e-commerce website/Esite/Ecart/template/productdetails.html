@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0; /* Light background for contrast */
+        padding: 20px; /* Space around the page */
+    }
+
+    /* Header Styles */
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px; /* Space below the header */
+        border-radius: 8px; /* Rounded corners for header */
+    }
+
+    /* Product Detail Styles */
+    .product-details {
+        display: flex; /* Use flexbox to align items */
+        align-items: flex-start; /* Align items at the start */
+        background-color: #fff; /* White background for product details */
+        border: 1px solid #ddd; /* Light gray border */
+        border-radius: 8px; /* Rounded corners */
+        padding: 20px; /* Space inside the product details box */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        gap: 20px; /* Space between image and details */
+        margin: 0 auto; /* Center the product details section */
+        max-width: 800px; /* Limit the width of the product details */
+    }
+
+    .product-details img {
+        width: 100%; /* Make the image responsive */
+        max-width: 300px; /* Maximum width of the image */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Match corners with item */
+    }
+
+    .product-info {
+        flex: 1; /* Allow this section to grow */
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Unique styling for product name, details, and price */
+    .product-name, .product-description, .product-price {
+        border: 2px solid #28a745; /* Green border for each element */
+        border-radius: 5px; /* Rounded corners */
+        padding: 15px; /* Space inside the borders */
+        margin-bottom: 15px; /* Space below each element */
+        background-color: #e8f5e9; /* Light green background for contrast */
+    }
+
+    .product-name h2 {
+        font-size: 20px; /* Font size for product name */
+        color: #333; /* Darker text color */
+    }
+
+    .product-description h4 {
+        font-size: 16px; /* Font size for details */
+        color: #555; /* Slightly lighter color for description */
+    }
+
+    .product-price h4 {
+        font-size: 18px; /* Font size for price */
+        color: #28a745; /* Green color for price */
+    }
+
+    .btn-buy {
+        margin-top: 20px; /* Space above buy button */
+        padding: 10px 20px; /* Button padding */
+        font-size: 14px; /* Font size for button text */
+        color: #fff; /* White text color */
+        background-color: #28a745; /* Green background for button */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners for button */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth background color transition */
+    }
+
+    .btn-buy:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header HTML -->
+<div class="header">
+    <h1>E Cart</h1>
+    <p>Deatils Page</p>
+</div>
+
+<!-- Product Details Section -->
+<div class="product-details">
+    <img src="{{ product_detail.product_image.url }}" alt="{{ product_detail.product_name }}">
+    
+    <div class="product-info">
+        <div class="product-name">
+            <h2>Name: {{ product_detail.product_name }}</h2>
+        </div>
+        
+        <div class="product-description">
+            <h4>Details: {{ product_detail.product_description }}</h4>
+        </div>
+        
+        <div class="product-price">
+            <h4>Price: Rs.{{ product_detail.product_price }}</h4>
+        </div>
+
+        <button onclick="window.location.href='{% url 'confirmation_page' product_detail.id %}'" class="btn-buy">
+            Buy
+        </button>
+    </div>
+</div>
+
+{% endblock %}

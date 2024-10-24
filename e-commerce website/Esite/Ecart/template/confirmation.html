@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        /* Confirmation Page Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto; /* Center the container */
+        }
+
+        /* Product Image */
+        .container img {
+            width: 100%; /* Full width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Product Name */
+        .container h2 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 20px; /* Slightly larger font size */
+            text-align: center; /* Center the text */
+        }
+
+        .container h6 {
+            color: #28a745; /* Green color for price */
+            text-align: center; /* Center the text */
+            margin-bottom: 20px; /* Space below price */
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%; /* Full width */
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width button */
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header HTML -->
+    <div class="header">
+        <h1>E cart</h1>
+        <p>Product Confirmation Page</p>
+    </div>
+
+    <!-- Confirmation Page Content -->
+    <div class="container">
+        <form method="post">
+            <!-- Add CSRF token for security (if using Django) -->
+            {% csrf_token %}
+
+            <!-- Product Image -->
+            <img src="{{ order_detail.product_image.url }}" alt="{{ order_detail.product_name }}">
+
+            <!-- Product Name -->
+            <h2>Name: {{ order_detail.product_name }}</h2>
+            <h6>Price of 1 quantity: Rs.{{ order_detail.product_price }}</h6>
+
+            <!-- Input for Total Number of Products -->
+            <div class="form-group">
+                <label for="total_number_of_product">Total Number of Products:</label>
+                <input type="text" id="total_number_of_product" name="total_number_of_product" placeholder="Enter quantity" required>
+            </div>
+
+            <!-- Confirm Button -->
+            <button class="btn" type="submit">Confirm</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

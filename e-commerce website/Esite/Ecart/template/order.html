@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Site Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px; /* Increased width for better spacing */
+            margin: 0 auto;
+            gap: 20px; /* Added gap between items */
+        }
+
+        .item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 48%; /* Adjusted width for better alignment */
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Margin below each item for better spacing */
+        }
+
+        .separator {
+            width: 2%; /* Small width for the separator */
+            background-color: #ddd; /* Light gray color for the border */
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Increased padding for a larger button */
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px; /* Added margin for spacing above buttons */
+        }
+
+        .btn:disabled {
+            background-color: #ccc; /* Gray out disabled buttons */
+            cursor: not-allowed;
+        }
+
+        .product-image {
+            width: 100%; /* Full width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            margin-bottom: 15px; /* Spacing below image */
+        }
+
+        .address-detail {
+            margin-bottom: 15px; /* Spacing below address details */
+        }
+
+        h2 {
+            margin-bottom: 15px; /* Consistent spacing below the product name */
+        }
+
+        h4 {
+            margin-top: 10px; /* Added margin above price */
+            margin-bottom: 15px; /* Added margin below price */
+        }
+
+        h3 {
+            margin-bottom: 15px; /* Added margin below the shipping address title */
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <h1>Congratulations!</h1>
+    <p>This product is yours!</p>
+</header>
+
+<main>
+    <div class="container">
+        <!-- Product Details Section -->
+        <div class="item">
+            <img src="{{ final_order_detail.product_image.url }}" alt="{{ final_order_detail.product_name }}" class="product-image">
+            <h2>Name: {{ final_order_detail.product_name }}</h2>
+            <h4>Final Amount: ${{ final_cost }}</h4>
+            {% if add %}
+            <a href="{% url 'done' final_order_detail.id %}">
+                <button class="btn">Place Order</button>
+            </a>
+            {% else %}
+                <button class="btn" disabled>Please Add Shipping Address</button>
+            {% endif %}
+        </div>
+
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Shipping Address Section -->
+        <div class="item">
+            <h3>Shipping Address</h3>
+            {% if add %}
+                <div class="address-detail">
+                    <p><strong>Address:</strong> {{ final_shipping_address.Street_Address }}</p>
+                </div>
+                <div class="address-detail">
+                    <p><strong>City:</strong> {{ final_shipping_address.City }}</p>
+                </div>
+                <div class="address-detail">
+                    <p><strong>State:</strong> {{ final_shipping_address.State }}</p>
+                </div>
+                <a href="{% url 'shipping_add_edit' final_order_detail.id %}">
+                    <button class="btn">Change Address Details</button>
+                </a>
+            {% else %}
+                <p>Add Shipping Address</p>
+                <form method="POST" action="{% url 'confirmation_page' product_id=final_order_detail.id %}">
+                    {% csrf_token %}
+                    {{ final_shipping_address.as_p }}
+                    <button type="submit" name="add_address" class="btn">Save Address</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
